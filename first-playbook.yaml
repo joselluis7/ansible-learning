@@ -1,0 +1,10 @@
+---
+  - name: first-playbook
+    hosts: 192.168.100.9
+    tasks:
+      - name: ensure nano is there
+        become: yes
+        apt:
+          name: nano
+          state: latest
+          
