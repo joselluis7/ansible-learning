@@ -28,3 +28,23 @@
       state: latest
     when: ansible_distribution in ["CentOS","Fedora"]
   
+  ###
+  - name: copy sample file to web-server
+    copy:
+      src: sample-web-page.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644
+  ###
+  - name: copy sample file to web-server
+    copy:
+      dest: /var/www/html/php-info.php
+      content: "<?php \n
+              // Show all information, defaults to INFO_ALL \n
+              phpinfo(); \n
+              ?>"
+      owner: root
+      group: root
+      mode: 0644
+  
