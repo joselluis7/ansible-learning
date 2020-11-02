@@ -1,0 +1,30 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+  
+  - name: run updates in CentOS and Ubuntu
+    package:
+        update_cache: yes
+
+- hosts: web_servers
+  become: yes
+  tasks:
+
+  - name: install apache and php for ubuntu 
+    apt:
+     name:
+        - apache2
+        - libapache2-mod-php
+     state: latest
+    when: ansible_distribution == "Ubuntu"     
+
+  - name: install apache and php in rpm systems
+    dnf:
+      name:
+        - httpd
+        - php
+      state: latest
+    when: ansible_distribution in ["CentOS","Fedora"]
+  
