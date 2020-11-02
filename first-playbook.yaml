@@ -1,10 +1,16 @@
 ---
   - name: first-playbook
-    hosts: 192.168.100.9
+    hosts: all
+    become: yes
     tasks:
-      - name: ensure nano is there
-        become: yes
+      - name: ensure byobu is there
         apt:
-          name: nano
+          name: byobu
           state: latest
-          
+        when: ansible_distribution == "Ubuntu" 
+
+      - name: ensure byobu is there
+        dnf:
+          name: byobu
+          state: latest
+        when: ansible_distribution in ["CentOS", "Fedora"]
