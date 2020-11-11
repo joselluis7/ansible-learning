@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+  
+  - name: run updates in CentOS and Ubuntu
+    package:
+        update_cache: yes
+
+- hosts: web_servers
+  become: yes
+  roles:
+    - web_servers
