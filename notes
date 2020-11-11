@@ -1,0 +1,4 @@
+
+**ABOUT ROLE
+Note: When add a role structure, ansible will identify automatically some facts that means we don't need to specify
+For example: main.yml file, the file diretory, all we have to do is to create the correct struture
