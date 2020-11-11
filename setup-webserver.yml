@@ -28,6 +28,26 @@
       state: latest
     when: ansible_distribution in ["CentOS","Fedora"]
   
+  - name: start httpd (CentOS)
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: change email adress for admin user
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^ServerAdmin'
+      line: ServerAdmin adminuser@companydomain.com
+    when: ansible_distribution == "CentOS"
+    register: httpd
+
+  - name: restart apache after any change
+    service:
+      name: httpd
+      state: restarted
+    when: httpd.changed
   ###
   - name: copy sample file to web-server
     copy:
