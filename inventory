@@ -1,6 +1,6 @@
 [web_servers]
-192.168.100.7
-192.168.100.5
+centos-server-ansible ansible_host=192.168.100.7
+ubuntu-server-ansible ansible_host=192.168.100.5
 
 [db_servers]
 

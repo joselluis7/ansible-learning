@@ -1,22 +1,13 @@
 - name: install apache and php for ubuntu 
-  apt:
+  package:
     name:
-      - apache2
-      - libapache2-mod-php
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
     state: latest
-  when: ansible_distribution == "Ubuntu"     
-
-- name: install apache and php in rpm systems
-  dnf:
-    name:
-      - httpd
-      - php
-    state: latest
-  when: ansible_distribution in ["CentOS","Fedora"]
 
 - name: start httpd (CentOS)
   service:
-    name: httpd
+    name: "{{ apache_package_name }}"
     state: started
     enabled: yes
   when: ansible_distribution == "CentOS"
@@ -25,15 +16,10 @@
   lineinfile:
     path: /etc/httpd/conf/httpd.conf
     regexp: '^ServerAdmin'
-    line: ServerAdmin adminuser@companydomain.com
+    line: ServerAdmin adminuser@companydomain.com.ao.mijo
   when: ansible_distribution == "CentOS"
-  register: httpd
+  notify: restart_apache
 
-- name: restart apache after any change
-  service:
-    name: httpd
-    state: restarted
-  when: httpd.changed
 ###
 - name: copy sample file to web-server
   copy:
