@@ -2,3 +2,11 @@
 **ABOUT ROLE
 Note: When add a role structure, ansible will identify automatically some facts that means we don't need to specify
 For example: main.yml file, the file diretory, all we have to do is to create the correct struture
+
+**ANSIBLE VAULT
+Note: Ansible vault is used to encrypt information, a file ou text that we want to keep in secret
+
+	Command: ansible-vault decrypt file-to-encrypt --vault-password-file ~/.vault_key
+	Description: .vault_key contains the password that we use to encrypt the information
+
+Ansible vault is very usefull and powerfull
